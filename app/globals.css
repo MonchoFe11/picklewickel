@@ -1,0 +1,62 @@
+/* tailwindcss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --color-pickle-dark: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #000000;
+  color: white;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Hide scrollbar but keep scrollability */
+.no-scrollbar::-webkit-scrollbar { 
+  display: none; 
+}
+.no-scrollbar { 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+/* Default theme - Dark (exactly as current) */
+:root {
+  --tw-surface: #000000;
+  --tw-surface-light: #1f2937;
+  --tw-on-surface: #ffffff;
+  --tw-accent: #839c84;
+  --tw-divider: #374151;
+}
+
+/* Light theme */
+.theme-light {
+  --tw-surface: #ffffff;
+  --tw-surface-light: #f8fafc;
+  --tw-on-surface: #1e293b;
+  --tw-accent: #065f46;
+  --tw-divider: #e2e8f0;
+}

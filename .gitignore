@@ -1,0 +1,10 @@
+node_modules
+.next
+.env.local
+.vercel
+.env*.local
+node_modules/
+
+# Sentry Config File
+.env.sentry-build-plugin
+node_modules/

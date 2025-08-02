@@ -1,0 +1,33 @@
+###
+# @name getAllTargets
+# GET all scrape targets (should be empty at first)
+GET http://localhost:3001/api/scrape-targets
+
+###
+# @name createTarget
+# POST - Create a new scrape target
+POST http://localhost:3001/api/scrape-targets
+Content-Type: application/json
+
+{
+  "league": "PPA",
+  "tournamentName": "2025 PPA Atlanta Open",
+  "url": "https://brackets.pickleballtournaments.com/tournaments/ppa-tour-atlanta-open-2025/events"
+}
+
+###
+# @name updateTarget
+# PUT - Update the target we just created
+PUT http://localhost:3001/api/scrape-targets
+Content-Type: application/json
+
+{
+  "id": "{{createTarget.response.body.$.id}}",
+  "isActive": false,
+  "tournamentName": "2025 PPA Atlanta Open (UPDATED NAME)"
+}
+
+###
+# @name deleteTarget
+# DELETE - Delete the target we created
+DELETE http://localhost:3001/api/scrape-targets?id={{createTarget.response.body.$.id}}
