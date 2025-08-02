@@ -3,8 +3,8 @@ import { Redis } from '@upstash/redis';
 
 // Initialize Redis with new V2 credentials
 const redis = new Redis({
-  url: process.env.V2__KV_REST_API_URL!,
-  token: process.env.V2__KV_REST_API_TOKEN!,
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
 });
 
 const MATCHES_KEY = 'picklewickel_scraped_matches_v1';

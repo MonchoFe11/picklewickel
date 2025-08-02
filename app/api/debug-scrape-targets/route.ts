@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
 
-// Initialize Redis with new V2 credentials
+
 const redis = new Redis({
-  url: process.env.V2__KV_REST_API_URL!,
-  token: process.env.V2__KV_REST_API_TOKEN!,
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
 });
 
 export async function GET() {
