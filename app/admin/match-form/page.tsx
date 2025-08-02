@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import { useMatches } from '../../contexts/MatchesContext';
-import { useTournaments } from '../../contexts/TournamentsContext';
 import { getAvailableBrands } from '../../../lib/brands';
 
 export default function MatchForm() {
@@ -30,32 +29,14 @@ export default function MatchForm() {
     getMatchById
   } = useMatches();
 
-  const { tournaments: tournamentObjects, refreshTournaments } = useTournaments();
-  const { getUniqueTournaments } = useMatches();
+  // NUCLEAR: NO tournament API calls - matches only
+const { getUniqueTournaments } = useMatches();
 
-  // Debug logging - FIXED: Only run once on mount
-useEffect(() => {
-  console.log('🔍 Tournament objects in match form:', tournamentObjects);
-  refreshTournaments(); // Force refresh ONCE
-}, []); // ← EMPTY DEPENDENCY ARRAY = runs only once!
-
-  // Combine tournaments from BOTH sources (like Tournament Management does)
-  const tournaments = useMemo(() => {
-    // Get managed tournaments from TournamentsContext
-    const managedTournaments = tournamentObjects.map(t => t.name);
-    
-    // Get tournaments from existing matches
-    const matchTournaments = getUniqueTournaments();
-    
-    // Combine and deduplicate
-    const allTournaments = [...new Set([...managedTournaments, ...matchTournaments])].sort();
-    
-    console.log('🔍 Managed tournaments:', managedTournaments);
-    console.log('🔍 Match tournaments:', matchTournaments);  
-    console.log('🔍 Combined tournaments:', allTournaments);
-    
-    return allTournaments;
-  }, [tournamentObjects, getUniqueTournaments]);
+const tournaments = useMemo(() => {
+  const matchTournaments = getUniqueTournaments();
+  console.log('🔍 Match tournaments only (NO API):', matchTournaments);  
+  return matchTournaments.sort();
+}, [getUniqueTournaments]);
   
   const availableBrands = useMemo(() => getAvailableBrands(), []);
 
