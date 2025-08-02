@@ -33,11 +33,11 @@ export default function MatchForm() {
   const { tournaments: tournamentObjects, refreshTournaments } = useTournaments();
   const { getUniqueTournaments } = useMatches();
 
-  // Debug logging
-  useEffect(() => {
-    console.log('🔍 Tournament objects in match form:', tournamentObjects);
-    refreshTournaments(); // Force refresh
-  }, [refreshTournaments]);
+  // Debug logging - FIXED: Only run once on mount
+useEffect(() => {
+  console.log('🔍 Tournament objects in match form:', tournamentObjects);
+  refreshTournaments(); // Force refresh ONCE
+}, []); // ← EMPTY DEPENDENCY ARRAY = runs only once!
 
   // Combine tournaments from BOTH sources (like Tournament Management does)
   const tournaments = useMemo(() => {
