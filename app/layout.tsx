@@ -28,9 +28,6 @@ export function generateMetadata(): Metadata {
       description: 'Your professional pickleball companion app',
       images: ['/logo.png'],
     },
-    other: {
-      ...Sentry.getTraceData()
-    }
   }
 }
 
