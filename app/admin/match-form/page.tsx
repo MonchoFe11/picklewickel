@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { Suspense } from 'react';
 import { useMatches } from '../../contexts/MatchesContext';
 import { getAvailableBrands } from '../../../lib/brands';
 
@@ -29,14 +28,12 @@ export default function MatchForm() {
     getMatchById
   } = useMatches();
 
-  // NUCLEAR: NO tournament API calls - matches only
-const { getUniqueTournaments } = useMatches();
+  // Get tournament names derived from existing matches
+  const { getUniqueTournaments } = useMatches();
 
-const tournaments = useMemo(() => {
-  const matchTournaments = getUniqueTournaments();
-  console.log('🔍 Match tournaments only (NO API):', matchTournaments);  
-  return matchTournaments.sort();
-}, [getUniqueTournaments]);
+  const tournaments = useMemo(() => {
+    return getUniqueTournaments();
+  }, [getUniqueTournaments]);
   
   const availableBrands = useMemo(() => getAvailableBrands(), []);
 
@@ -341,8 +338,8 @@ const tournaments = useMemo(() => {
       <div className="max-w-2xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">
-  🔥 NUCLEAR TEST - {editId ? 'Edit Match' : 'Add New Match'}
-</h1>
+            {editId ? 'Edit Match' : 'Add New Match'}
+          </h1>
           <button
             onClick={() => router.push(returnTo)}
             className="text-onSurface/60 hover:text-onSurface"

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode, useMemo } from 'react';
 import { Match } from '../types/match';
 
 export interface MatchesContextValue {
@@ -243,26 +243,26 @@ export function MatchesProvider({ children }: { children: ReactNode }) {
     };
   };
 
-  const getUniqueTournaments = (): string[] => {
+  const getUniqueTournaments = useCallback((): string[] => {
     return uniqueTournaments;
-  };
+  }, [uniqueTournaments]);
 
   const getMatchCountByTournament = (tournamentName: string): number => {
     return matches.filter(match => match.tournamentName === tournamentName).length;
   };
 
   // Query Helpers
-  const getMatchById = (id: string): Match | undefined => {
+  const getMatchById = useCallback((id: string): Match | undefined => {
     return matches.find(match => match.id === id);
-  };
+  }, [matches]);
 
-  const getMatchesByDate = (date: string): Match[] => {
+  const getMatchesByDate = useCallback((date: string): Match[] => {
     return matches.filter(match => match.date === date);
-  };
+  }, [matches]);
 
-  const getAllMatches = (): Match[] => {
+  const getAllMatches = useCallback((): Match[] => {
     return matches;
-  };
+  }, [matches]);
 
   const contextValue: MatchesContextValue = {
     matches,

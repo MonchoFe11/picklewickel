@@ -2,7 +2,6 @@ import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import { ScrapeTargetsProvider } from '../contexts/ScrapeTargetsContext'
-import { TournamentsProvider } from '../contexts/TournamentsContext'
 
 export default async function AdminLayout({
   children,
@@ -33,11 +32,9 @@ export default async function AdminLayout({
           </SignedIn>
         </div>
       </div>
-      <TournamentsProvider>
-        <ScrapeTargetsProvider>
-          {children}
-        </ScrapeTargetsProvider>
-      </TournamentsProvider>
+      <ScrapeTargetsProvider>
+        {children}
+      </ScrapeTargetsProvider>
     </div>
   )
 }

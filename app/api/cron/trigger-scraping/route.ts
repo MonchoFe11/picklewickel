@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
 
-// Initialize Redis with new V2 credentials
 const redis = new Redis({
   url: process.env.KV_REST_API_URL!,
   token: process.env.KV_REST_API_TOKEN!,
@@ -43,7 +42,7 @@ export async function GET(request: NextRequest) {
         message: 'No active scrape targets with tournament mode enabled',
         targets: 0,
         triggered: false,
-        database: 'V2 (new working database)'
+        database: 'production'
       });
     }
 
@@ -88,7 +87,7 @@ export async function GET(request: NextRequest) {
         targets: activeTargets.length,
         triggered: true,
         n8nStatus: n8nResponse.status,
-        database: 'V2 (new working database)'
+        database: 'production'
       });
 
     } catch (n8nError) {
